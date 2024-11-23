@@ -1,79 +1,70 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = 800;
-canvas.height = 600;
+canvas.width = 1000; // Увеличено
+canvas.height = 700; // Увеличено
 
 // переменные
 const paddleWidth = 10;
-const paddleHeight = 100;
+const paddleHeight = 120; // Увеличено
 const ballSize = 10;
 
 const paddles = [
     { x: 10, y: canvas.height / 2 - paddleHeight / 2, dy: 0, keyUp: 'w', keyDown: 's' },
     { x: canvas.width - 20, y: canvas.height / 2 - paddleHeight / 2, dy: 0, keyUp: 'ArrowUp', keyDown: 'ArrowDown' },
-    { x: canvas.width / 2 - paddleWidth / 2, y: 10, dx: 0, keyLeft: 'a', keyRight: 'd', horizontal: true },
-    { x: canvas.width / 2 - paddleWidth / 2, y: canvas.height - 20, dx: 0, keyLeft: 'j', keyRight: 'l', horizontal: true },
-    
 ];
 
 const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    dx: 3,
-    dy: 3,
+    dx: 2, // Замедлено
+    dy: 2,
 };
 
-// управление
+let leftScore = 0;
+let rightScore = 0;
+
+// Управление
 document.addEventListener('keydown', (e) => {
     paddles.forEach((paddle) => {
-        if (e.key === paddle.keyUp) paddle.dy = -5;
-        if (e.key === paddle.keyDown) paddle.dy = 5;
-        if (e.key === paddle.keyLeft) paddle.dx = -5;
-        if (e.key === paddle.keyRight) paddle.dx = 5;
+        if (e.key === paddle.keyUp) paddle.dy = -5; // Вверх
+        if (e.key === paddle.keyDown) paddle.dy = 5; // Вниз
     });
 });
 
 document.addEventListener('keyup', (e) => {
     paddles.forEach((paddle) => {
-        if (e.key === paddle.keyLeft) paddle.dx = -5;
-        if (e.key === paddle.keyRight) paddle.dx = 5;
+        if (e.key === paddle.keyUp || e.key === paddle.keyDown) paddle.dy = 0; // Остановить движение
     });
 });
 
-// цикл (игровой)
+// Игровой цикл
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // перемещенние ракеток
+    // Отображение голевых зон
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
+    ctx.fillRect(0, 0, 30, canvas.height); // Левая голевая зона
+    ctx.fillRect(canvas.width - 30, 0, 30, canvas.height); // Правая голевая зона
+
+    // Перемещение ракеток
     paddles.forEach((paddle) => {
-        if (paddle.horizontal) {
-            paddle.x += paddle.dx || 0;
-            if (paddle.x < 0) paddle.x = 0;
-            if (paddle.x + paddleWidth > canvas.width) paddle.x = canvas.width - paddleWidth;
-        } else {
-            paddle.y += paddle.dy || 0;
-            if (paddle.y < 0) paddle.y = 0;
-            if (paddle.y + paddleHeight > canvas.height) paddle.y = canvas.height - paddleHeight;
-        }
+        paddle.y += paddle.dy || 0;
+        if (paddle.y < 0) paddle.y = 0;
+        if (paddle.y + paddleHeight > canvas.height) paddle.y = canvas.height - paddleHeight;
 
         ctx.fillStyle = '#fff';
-        if (paddle.horizontal) {
-            ctx.fillRect(paddle.x, paddle.y, paddleWidth, paddleWidth);
-        } else {
-            ctx.fillRect(paddle.x, paddle.y, paddleWidth, paddleHeight);
-        }
+        ctx.fillRect(paddle.x, paddle.y, paddleWidth, paddleHeight);
     });
 
-    //положения мяча
+    // Перемещение мяча
     ball.x += ball.dx;
     ball.y += ball.dy;
 
-    // Столкновения (стены)
+    // Столкновения с верхней и нижней стеной
     if (ball.y <= 0 || ball.y + ballSize >= canvas.height) ball.dy *= -1;
-    if (ball.x <= 0 || ball.x + ballSize >= canvas.width) ball.dx *= -1;
 
-    // столкновение с (моделькой)
+    // Столкновение мяча с ракетками
     paddles.forEach((paddle) => {
         if (
             ball.x < paddle.x + paddleWidth &&
@@ -81,17 +72,38 @@ function gameLoop() {
             ball.y < paddle.y + paddleHeight &&
             ball.y + ballSize > paddle.y
         ) {
-            ball.dx *= -1;
-            if (!paddle.horizontal) ball.dy *= -1;
+            ball.dx *= -1.1; // Ускоряем мяч при каждом ударе
         }
-        
     });
 
-    //мяч моделька
+    // Проверка голов
+    if (ball.x <= 0) {
+        rightScore++;
+        resetBall();
+    }
+    if (ball.x + ballSize >= canvas.width) {
+        leftScore++;
+        resetBall();
+    }
+
+    // Отображение мяча
     ctx.fillStyle = '#fff';
     ctx.fillRect(ball.x, ball.y, ballSize, ballSize);
 
+    // Отображение счета
+    ctx.font = '30px Arial';
+    ctx.fillStyle = '#fff';
+    ctx.fillText(`${leftScore} : ${rightScore}`, canvas.width / 2 - 30, 30);
+
     requestAnimationFrame(gameLoop);
+}
+
+// Сброс мяча после гола
+function resetBall() {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
+    ball.dx = (Math.random() > 0.5 ? 2 : -2); // Случайное направление
+    ball.dy = (Math.random() > 0.5 ? 2 : -2);
 }
 
 gameLoop();
