@@ -10,8 +10,8 @@ const paddleHeight = 120; // Увеличено
 const ballSize = 10;
 
 const paddles = [
-    { x: 10, y: canvas.height / 2 - paddleHeight / 2, dy: 0, keyUp: 'w', keyDown: 's' },
-    { x: canvas.width - 20, y: canvas.height / 2 - paddleHeight / 2, dy: 0, keyUp: 'ArrowUp', keyDown: 'ArrowDown' },
+    { x: 10, y: canvas.height / 2 - paddleHeight / 2, dy: 0, keyUp: 'w', keyDown: 's' }, // Левая ракетка
+    { x: canvas.width - 20, y: canvas.height / 2 - paddleHeight / 2, dy: 0, keyUp: 'ArrowUp', keyDown: 'ArrowDown' }, // Правая ракетка
 ];
 
 const ball = {
