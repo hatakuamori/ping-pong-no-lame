@@ -8,10 +8,34 @@ body {
   color: #fff;
   font-family: "Chakra Petch", sans-serif;
   font-weight: 500;
-  font-style: normal;
+}
+
+.controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background-color: #b284d4;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ea8ff6;
 }
 
 canvas {
   border: 2px solid #fff;
-  background: linear-gradient(rgb(240, 143, 213), rgb(230, 145, 238))
+  background: linear-gradient(rgb(240, 143, 213), rgb(230, 145, 238));
+  width: 100%;
+  max-width: 800px;
+  height: auto;
 }

@@ -24,7 +24,11 @@ const ball = {
 let leftScore = 0;
 let rightScore = 0;
 
-// Управление
+const moonTexture = new Image();
+moonTexture.src = 'grizly-club-p-zheltaya-luna-na-belom-fone-18.png';  // Укажите путь к изображению Луны
+
+
+// Управление через клавиатуру
 document.addEventListener('keydown', (e) => {
     paddles.forEach((paddle) => {
         if (e.key === paddle.keyUp) paddle.dy = -5; // Вверх
@@ -36,6 +40,34 @@ document.addEventListener('keyup', (e) => {
     paddles.forEach((paddle) => {
         if (e.key === paddle.keyUp || e.key === paddle.keyDown) paddle.dy = 0; // Остановить движение
     });
+});
+
+// Управление через кнопки
+document.getElementById('leftUpBtn').addEventListener('click', () => {
+    paddles[0].dy = -5; // Двигаем левую ракетку вверх
+});
+document.getElementById('leftDownBtn').addEventListener('click', () => {
+    paddles[0].dy = 5; // Двигаем левую ракетку вниз
+});
+document.getElementById('rightUpBtn').addEventListener('click', () => {
+    paddles[1].dy = -5; // Двигаем правую ракетку вверх
+});
+document.getElementById('rightDownBtn').addEventListener('click', () => {
+    paddles[1].dy = 5; // Двигаем правую ракетку вниз
+});
+
+// Сброс движения после отпускания кнопки
+document.getElementById('leftUpBtn').addEventListener('mouseup', () => {
+    paddles[0].dy = 0;
+});
+document.getElementById('leftDownBtn').addEventListener('mouseup', () => {
+    paddles[0].dy = 0;
+});
+document.getElementById('rightUpBtn').addEventListener('mouseup', () => {
+    paddles[1].dy = 0;
+});
+document.getElementById('rightDownBtn').addEventListener('mouseup', () => {
+    paddles[1].dy = 0;
 });
 
 // Игровой цикл
@@ -87,7 +119,7 @@ function gameLoop() {
     }
 
     // Отображение мяча
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = '#gggg';
     ctx.fillRect(ball.x, ball.y, ballSize, ballSize);
 
     // Отображение счета
