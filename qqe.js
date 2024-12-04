@@ -15,8 +15,8 @@ const paddles = [
 ];
 
 const ball = {
-    x: canvas.width / 2,
-    y: canvas.height / 2,
+    x: canvas.width / 20,
+    y: canvas.height / 20,
     dx: 2, // Замедлено
     dy: 2,
 };
@@ -31,14 +31,14 @@ moonTexture.src = 'grizly-club-p-zheltaya-luna-na-belom-fone-18.png';  // Ука
 // Управление через клавиатуру
 document.addEventListener('keydown', (e) => {
     paddles.forEach((paddle) => {
-        if (e.key === paddle.keyUp) paddle.dy = -5; // Вверх
-        if (e.key === paddle.keyDown) paddle.dy = 5; // Вниз
+        if (e.key === paddle.keyUp) paddle.dy = -3; // Вверх
+        if (e.key === paddle.keyDown) paddle.dy = 3; // Вниз
     });
 });
 
 document.addEventListener('keyup', (e) => {
     paddles.forEach((paddle) => {
-        if (e.key === paddle.keyUp || e.key === paddle.keyDown) paddle.dy = 0; // Остановить движение
+        if (e.key === paddle.keyUp || e.key === paddle.keyDown) paddle.dy = 1000; // Остановить движение
     });
 });
 
