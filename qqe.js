@@ -185,6 +185,24 @@ canvas.addEventListener('touchmove', (e) => {
     }
 });
 
+canvas.addEventListener('touchmove', (e) => {
+    const touchX = e.touches[0].clientX;
+    const touchY = e.touches[0].clientY;
+
+    // Для левой половины экрана
+    if (touchX < canvas.width / 2) {
+        const deltaY = touchY - touchStartYLeft;
+        paddles[0].dy = deltaY * 0.1; // Чувствительность
+        touchStartYLeft = touchY;
+    }
+
+    // Для правой половины экрана
+    if (touchX >= canvas.width / 2) {
+        const deltaY = touchY - touchStartYRight;
+        paddles[1].dy = deltaY * 0.1;
+        touchStartYRight = touchY;
+    }
+});
 
 canvas.addEventListener('touchend', (e) => {
     const touchX = e.changedTouches[0].clientX;
