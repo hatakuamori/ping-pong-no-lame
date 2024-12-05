@@ -41,7 +41,7 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('keyup', (e) => {
     paddles.forEach((paddle) => {
-        if (e.key === paddle.keyUp || e.key === paddle.keyDown) paddle.dy = 1000; // Остановить движение
+        if (e.key === paddle.keyUp || e.key === paddle.keyDown) paddle.dy = 0; // Остановить движение
     });
 });
 
