@@ -146,4 +146,53 @@ function resetBall() {
     ball.dy = (Math.random() > 0.5 ? 2 : -2);
 }
 
+let touchStartYLeft = 0;
+let touchStartYRight = 0;
+
+
+canvas.addEventListener('touchstart', (e) => {
+    const touchX = e.touches[0].clientX;
+    if (touchX < canvas.width / 2) {
+        touchStartYLeft = e.touches[0].clientY;
+    }
+});
+
+
+canvas.addEventListener('touchstart', (e) => {
+    const touchX = e.touches[0].clientX;
+    if (touchX > canvas.width / 2) {
+        touchStartYRight = e.touches[0].clientY;
+    }
+});
+
+
+canvas.addEventListener('touchmove', (e) => {
+    const touchX = e.touches[0].clientX;
+    const touchY = e.touches[0].clientY;
+
+   
+    if (touchX < canvas.width / 2) {
+        const deltaY = touchY - touchStartYLeft;
+        paddles[0].dy = deltaY > 0 ? 5 : -5;
+        touchStartYLeft = touchY;
+    }
+
+    
+    if (touchX > canvas.width / 2) {
+        const deltaY = touchY - touchStartYRight;
+        paddles[1].dy = deltaY > 0 ? 5 : -5;
+        touchStartYRight = touchY;
+    }
+});
+
+
+canvas.addEventListener('touchend', (e) => {
+    const touchX = e.changedTouches[0].clientX;
+    if (touchX < canvas.width / 2) {
+        paddles[0].dy = 0;
+    } else if (touchX > canvas.width / 2) {
+        paddles[1].dy = 0;
+    }
+});
+
 gameLoop();
