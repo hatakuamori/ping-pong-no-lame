@@ -8,7 +8,7 @@ canvas.height = 700; // Увеличено
 const paddleWidth = 10;
 const paddleHeight = 120; // Увеличено
 const ballSize = 10;
-const paddcolor0 = '#9b4dff';
+const paddcolor0 = '#ffff';
 const paddlcolor1 = '#00d4ff';
 
 const paddles = [
@@ -24,6 +24,10 @@ const ball = {
     color: '#ffea00'
 };
 
+// Частицы
+const particles = [];
+const maxParticles = 50;
+
 let leftScore = 0;
 let rightScore = 0;
 
@@ -34,8 +38,8 @@ moonTexture.src = 'grizly-club-p-zheltaya-luna-na-belom-fone-18.png';  // Ука
 // Управление через клавиатуру
 document.addEventListener('keydown', (e) => {
     paddles.forEach((paddle) => {
-        if (e.key === paddle.keyUp) paddle.dy = -3; // Вверх
-        if (e.key === paddle.keyDown) paddle.dy = 3; // Вниз
+        if (e.key === paddle.keyUp) paddle.dy = -6; // Вверх
+        if (e.key === paddle.keyDown) paddle.dy = 6; // Вниз
     });
 });
 
@@ -101,6 +105,9 @@ function gameLoop() {
     ball.x += ball.dx;
     ball.y += ball.dy;
 
+     // Создание частиц
+     createParticles(ball.x, ball.y);
+
     // Столкновения с верхней и нижней стеной
     if (ball.y <= 0 || ball.y + ballSize >= canvas.height) ball.dy *= -1;
 
@@ -127,8 +134,12 @@ function gameLoop() {
     }
 
     // Отображение мяча
-    ctx.fillStyle = '#ffff3b'
+    ctx.fillStyle = '#ffff'
     ctx.fillRect(ball.x, ball.y, ballSize, ballSize);
+
+    // Отображение частиц
+    drawParticles();
+
 
     // Отображение счета
     ctx.font = '30px Arial';
@@ -212,5 +223,42 @@ canvas.addEventListener('touchend', (e) => {
         paddles[1].dy = 0;
     }
 });
+
+// Создание частиц
+function createParticles(x, y) {
+    for (let i = 0; i < 3; i++) {
+        particles.push({
+            x: x + ballSize / 2,
+            y: y + ballSize / 2,
+            size: Math.random() * 4 + 2,
+            color: `#ffff, ${Math.random()})`,
+            dx: (Math.random() - 0.5) * 2,
+            dy: (Math.random() - 0.5) * 2,
+            life: 1,
+        });
+    }
+
+    if (particles.length > maxParticles) {
+        particles.splice(0, particles.length - maxParticles);
+    }
+}
+
+// Отрисовка частиц
+function drawParticles() {
+    particles.forEach((particle, index) => {
+        particle.x += particle.dx;
+        particle.y += particle.dy;
+        particle.life -= 0.02;
+
+        if (particle.life <= 0) {
+            particles.splice(index, 1);
+        } else {
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fillStyle = particle.color;
+            ctx.fill();
+        }
+    });
+}
 
 gameLoop();
