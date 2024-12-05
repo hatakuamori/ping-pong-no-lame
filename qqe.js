@@ -8,6 +8,8 @@ canvas.height = 700; // Увеличено
 const paddleWidth = 10;
 const paddleHeight = 120; // Увеличено
 const ballSize = 10;
+const paddcolor0 = '#9b4dff';
+const paddlcolor1 = '#00d4ff';
 
 const paddles = [
     { x: 10, y: canvas.height / 2 - paddleHeight / 2, dy: 0, keyUp: 'w', keyDown: 's' }, // Левая ракетка
@@ -19,6 +21,7 @@ const ball = {
     y: canvas.height / 20,
     dx: 2, // Замедлено
     dy: 2,
+    color: '#ffea00'
 };
 
 let leftScore = 0;
@@ -81,11 +84,16 @@ function gameLoop() {
 
     // Перемещение ракеток
     paddles.forEach((paddle) => {
+         // Настройка эффекта свечения для ракетки
+         ctx.shadowBlur = 20; // Размытие
+         ctx.shadowColor = paddle.color; // Цвет свечения
+         ctx.shadowOffsetX = 0; // Сдвиг по оси X
+         ctx.shadowOffsetY = 0; // Сдвиг по оси Y
         paddle.y += paddle.dy || 0;
         if (paddle.y < 0) paddle.y = 0;
         if (paddle.y + paddleHeight > canvas.height) paddle.y = canvas.height - paddleHeight;
 
-        ctx.fillStyle = '#fff';
+        ctx.fillStyle = paddcolor0; // Цвет ракетки
         ctx.fillRect(paddle.x, paddle.y, paddleWidth, paddleHeight);
     });
 
@@ -119,7 +127,7 @@ function gameLoop() {
     }
 
     // Отображение мяча
-    ctx.fillStyle = '#gggg';
+    ctx.fillStyle = '#ffff3b'
     ctx.fillRect(ball.x, ball.y, ballSize, ballSize);
 
     // Отображение счета

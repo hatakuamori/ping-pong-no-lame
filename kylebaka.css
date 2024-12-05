@@ -5,7 +5,7 @@ body {
   align-items: center;
   height: 100vh;
   background: linear-gradient(rgb(255, 171, 245), rgb(255, 163, 209));
-  color: #fff;
+  color: #ffffff;
   font-family: "Chakra Petch", sans-serif;
   font-weight: 500;
 }
@@ -33,9 +33,10 @@ button:hover {
 }
 
 canvas {
-  border: 2px solid #fff;
+  border: 2px solid #ffffff;
   background: linear-gradient(rgb(240, 143, 213), rgb(230, 145, 238));
   width: 100%;
   max-width: 800px;
   height: auto;
 }
+
