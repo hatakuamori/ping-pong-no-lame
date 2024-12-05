@@ -45,6 +45,33 @@ document.addEventListener('keyup', (e) => {
     });
 });
 
+// Управление через кнопки
+document.getElementById('leftUpBtn').addEventListener('click', () => {
+    paddles[0].dy = -5; // Двигаем левую ракетку вверх
+});
+document.getElementById('leftDownBtn').addEventListener('click', () => {
+    paddles[0].dy = 5; // Двигаем левую ракетку вниз
+});
+document.getElementById('rightUpBtn').addEventListener('click', () => {
+    paddles[1].dy = -5; // Двигаем правую ракетку вверх
+});
+document.getElementById('rightDownBtn').addEventListener('click', () => {
+    paddles[1].dy = 5; // Двигаем правую ракетку вниз
+});
+
+// Сброс движения после отпускания кнопки
+document.getElementById('leftUpBtn').addEventListener('mouseup', () => {
+    paddles[0].dy = 0;
+});
+document.getElementById('leftDownBtn').addEventListener('mouseup', () => {
+    paddles[0].dy = 0;
+});
+document.getElementById('rightUpBtn').addEventListener('mouseup', () => {
+    paddles[1].dy = 0;
+});
+document.getElementById('rightDownBtn').addEventListener('mouseup', () => {
+    paddles[1].dy = 0;
+});
 
 // Игровой цикл
 function gameLoop() {
