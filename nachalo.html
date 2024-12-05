@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Начало</title>
+    <link rel="stylesheet" href="start.css">
+</head>
+<body>
+    <div class="start-container">
+        <button id="startButton" class="large-button">ИГРАТЬ</button>
+        <button id="controlsButton" class="small-button">Управление</button>
+    </div>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', () => {
+            window.location.href = "index.html";
+        });
+
+        document.getElementById('controlsButton').addEventListener('click', () => {
+            window.location.href = "controls.html";
+        });
+    </script>
+</body>
+</html>

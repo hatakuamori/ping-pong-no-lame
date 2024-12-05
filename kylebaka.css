@@ -1,10 +1,11 @@
 body {
+  overflow: hidden;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(rgb(255, 171, 245), rgb(255, 163, 209));
+  background: -webkit-linear-gradient(90deg, #ffcfd2,#fde4cf,#fbf8cc);background: linear-gradient(90deg, #ffcfd2,#fde4cf,#fbf8cc);
   color: #ffffff;
   font-family: "Chakra Petch", sans-serif;
   font-weight: 500;
@@ -34,9 +35,11 @@ button:hover {
 
 canvas {
   border: 2px solid #ffffff;
-  background: linear-gradient(rgb(240, 143, 213), rgb(230, 145, 238));
+  background: -webkit-linear-gradient(90deg, #ffcfd2,#fde4cf,#fbf8cc);background: linear-gradient(90deg, #ffcfd2,#fde4cf,#fbf8cc);
   width: 100%;
   max-width: 800px;
   height: auto;
 }
+
+
 

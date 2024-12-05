@@ -1,0 +1,100 @@
+/* Общий стиль */
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: -webkit-linear-gradient(90deg, #ffcfd2,#fde4cf,#fbf8cc);background: linear-gradient(90deg, #ffcfd2,#fde4cf,#fbf8cc);
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-align: center;
+}
+
+
+/* Стартовая страница */
+.start-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+button {
+    border: none;
+    color: white;
+    padding: 20px 40px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.large-button {
+    background: linear-gradient(90deg, #ff70d4, #ff85b8);
+    font-size: 36px;
+    box-shadow: 0 0 30px #ff70d4, 0 0 50px #ffc3e1;
+}
+
+.small-button {
+    background: linear-gradient(90deg, #b070ff, #c885ff);
+    font-size: 24px;
+    box-shadow: 0 0 20px #b070ff, 0 0 40px #c885ff;
+}
+
+/* Страница управления */
+.controls-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.exit-button {
+    position: absolute;
+    top: -40px; /* Отступ сверху */
+    left: 50%;  /* Выравнивание по горизонтали */
+    transform: translateX(-50%); /* Центрирование */
+    padding: 15px 30px;
+    font-size: 20px;
+    border-radius: 15px;
+    background: linear-gradient(90deg, #b070ff, #c885ff);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px #b070ff, 0 0 40px #c885ff;
+    transition: all 0.3s ease-in-out;
+}
+
+.exit-button:hover {
+    transform: translateX(-50%) scale(1.1);
+}
+
+.info-box {
+    background: linear-gradient(135deg, #d5b3ff, #e3c8ff);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(213, 179, 255, 0.6), 0 0 50px rgba(227, 200, 255, 0.8);
+    text-align: center;
+}
+
+.info-box h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.info-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.info-box li {
+    font-size: 20px;
+    margin: 5px 0;
+}

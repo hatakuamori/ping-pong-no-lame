@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление</title>
+    <link rel="stylesheet" href="start.css">
+</head>
+<body>
+    <div class="controls-page">
+        <button id="backButton" class="exit-button">ВIХIД</button>
+        <div class="info-box">
+            <h1>Управление</h1>
+            <p><strong>Левая ракетка:</strong></p>
+            <ul>
+                <li>Вверх: W</li>
+                <li>Вниз: S</li>
+            </ul>
+            <p><strong>Правая ракетка:</strong></p>
+            <ul>
+                <li>Вверх: стрелка вверх</li>
+                <li>Вниз: стрелка вниз</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('backButton').addEventListener('click', () => {
+            window.location.href = "nachalo.html";
+        });
+    </script>
+</body>
+</html>
