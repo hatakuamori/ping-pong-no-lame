@@ -33,6 +33,30 @@ button:hover {
   background-color: #ea8ff6;
 }
 
+/* Верхний левый угол */
+#leftUpBtn {
+  top: 100px;
+  left: 100px;
+}
+
+/* Нижний левый угол */
+#leftDownBtn {
+  bottom: 20px;
+  left: 20px;
+}
+
+/* Верхний правый угол */
+#rightUpBtn {
+  top: 20px;
+  right: 20px;
+}
+
+/* Нижний правый угол */
+#rightDownBtn {
+  bottom: 20px;
+  right: 20px;
+}
+
 canvas {
   border: 2px solid #ffffff;
   background: -webkit-linear-gradient(90deg, #ffcfd2,#fde4cf,#fbf8cc);background: linear-gradient(90deg, #ffcfd2,#fde4cf,#fbf8cc);
